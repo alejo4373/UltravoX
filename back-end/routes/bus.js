@@ -7,7 +7,6 @@ router.get('/:busroute', function(req, res, next) {
     .get(`http://bustime.mta.info/api/search?q=${req.params.busroute}`)
     .then(data => {
       res.status(200).json(data.data)
-      console.log(data.data)
     }) 
     .catch(err => next(err))
 });
