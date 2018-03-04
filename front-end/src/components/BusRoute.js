@@ -1,9 +1,13 @@
 import React from 'react';
+import axios from 'axios'; 
 
 class BusRoute extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {
+      value: '',
+      route: []
+    };
 
     this.handleChange = this.handleChange.bind(this);
   }
@@ -12,6 +16,18 @@ class BusRoute extends React.Component {
     this.setState({
       bus: event.target.value});
   }
+
+//   componentDidMount() {
+//     axios
+//     .get('/bus/get_time')
+//     .then(res => {
+//         console.log("response", res)
+//         this.setState({
+//             route: res.data.data
+//         })
+//     })
+// }  
+
 
   render() {
     return (
