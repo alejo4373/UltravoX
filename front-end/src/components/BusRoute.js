@@ -1,17 +1,10 @@
+
 import React from 'react';
+import axios from 'axios';
+ 
 
 class BusRoute extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
 
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({
-      bus: event.target.value});
-  }
 
   render() {
     return (
