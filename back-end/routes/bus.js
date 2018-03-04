@@ -14,4 +14,13 @@ router.post('/get_time', function (req, res, next) {
   })
 }) 
 
+router.get('/get_buses', function( req, res, next) {
+  console.log('hit route getBuses')
+  api.getAllBuses((err, data) => {
+    if(err) return next(err) 
+    res.status(200)
+       .json(data)
+  })
+})
+
 module.exports = router;
