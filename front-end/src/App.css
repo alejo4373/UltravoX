@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+h5{
+  color: black;
+}
+
 body{
   text-align: center;
   background: lightblue;
@@ -9,10 +13,20 @@ body{
 }
 .Block {
   border-radius: 25px;
-  background: rgb(21, 3, 97);
+  /* background: rgb(21, 3, 974); */
+  background: rgb(40, 84, 108);
   padding: 100px; 
   margin: 5px 10px 0px 10px;
   width: 300 px;
   height: 300 px;
 }
 
+input {
+  border-radius: 25px;
+  padding: 5px; 
+  text-align: center;
+  font-size: 10px;
+}
+.submit {
+  padding: 3px;
+}

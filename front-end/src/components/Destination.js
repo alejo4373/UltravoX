@@ -1,37 +1,29 @@
 import React from 'react';
-import Swipeable from 'react-swipeable';
 
-class Destination extends React.Component{ 
-     
-  swiping(e, deltaX, deltaY, absX, absY, velocity) {
- //   console.log("User is swiping...", e, deltaX, deltaY, absX, absY, velocity)
+class Destination extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
   }
- 
-  swipingLeft(e, absX) {
-//    console.log("Swipe Left...", e, absX)
+
+  handleChange(event) {
+    this.setState({
+      id: event.target.value});
   }
- 
-  swiped(e, deltaX, deltaY, isFlick, velocity) {
-//    console.log("Swiped...", e, deltaX, deltaY, isFlick, velocity);
-    console.log("DESTINATION WAS SWIPPED")
 
+  render() {
+    return (
+      <div class = "Block">
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          <input type="text" value={this.state.id} onChange={this.handleChange} placeholder="STOP ID" />
+        </label>
+      <p> {this.state.id} </p>
+      </form>
+      </div>
+    );
+  }
 }
- 
-  swipedUp(e, deltaY, isFlick) {
-//    console.log("Swiped Right..", e, deltaY, isFlick)
-  }  
-    render() {
-        return (
-            <Swipeable
-            onSwiping={this.swiping}
-            onSwipingLeft={this.swipingLeft}
-            onSwiped={this.swiped}
-            onSwipedUp={this.swipedRight} >
-            <div class="Block">
-            TO 74TH AND ROOSEVELT
-            </div></Swipeable>
-        )
-    }
-}
-
 export default Destination
