@@ -20,12 +20,12 @@ const getEta = (busId, stopId, callback) => {
     })
 }
 
-const getBusIdAndFireGetEta = (busName, callback) => {
+const getBusIdAndFireGetEta = (busName, stopId, callback) => {
+  console.log('params', busName, stopId)
   axios
     .get(`http://bustime.mta.info/api/search?q=${busName}`)
     .then(data => {
         var busId = data.data.searchResults.matches[0].id
-        var stopId = '550669'
         getEta(busId, stopId, callback)
     })
      .catch(err => {
@@ -38,4 +38,4 @@ module.exports ={
    getBusIdAndFireGetEta, 
 }
 
-getBusIdAndFireGetEta('q49', console.log)
+//getBusIdAndFireGetEta('q49', console.log)
