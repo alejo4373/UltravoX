@@ -1,28 +1,32 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+h5{
+  color: black;
+}
+
+body{
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+  background: lightblue;
+  font-size: 31px;
   color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+.Block {
+  border-radius: 25px;
+  /* background: rgb(21, 3, 974); */
+  background: rgb(40, 84, 108);
+  padding: 100px; 
+  margin: 5px 10px 0px 10px;
+  width: 300 px;
+  height: 300 px;
 }
 
-.App-title {
-  font-size: 1.5em;
+input {
+  border-radius: 25px;
+  padding: 5px; 
+  text-align: center;
+  font-size: 10px;
 }
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.submit {
+  padding: 3px;
 }
