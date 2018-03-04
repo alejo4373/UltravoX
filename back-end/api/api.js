@@ -8,8 +8,16 @@ const getEta = (busId, stopId, callback) => {
       // console.log(apiRes.data)
       // console.log('ETA', apiRes.data.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime)
       // console.log('ETA', apiRes.data.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall)
+      var eta = apiRes.data.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime
+      var now = Date.now()
+      var etaMil = Date.parse(eta)
+
+      //console.log('now', now)
+      //console.log('etaMil', etaMil)
+      var minutesLeft = Math.round((etaMil - now) / 60000)
       var resObj = {
         eta: apiRes.data.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime,
+        minutesAway: minutesLeft,
         proximityText: apiRes.data.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.ArrivalProximityText
       }
       callback(resObj)
@@ -21,7 +29,6 @@ const getEta = (busId, stopId, callback) => {
 }
 
 const getBusIdAndFireGetEta = (busName, stopId, callback) => {
-  console.log('params', busName, stopId)
   axios
     .get(`http://bustime.mta.info/api/search?q=${busName}`)
     .then(data => {
@@ -38,4 +45,4 @@ module.exports ={
    getBusIdAndFireGetEta, 
 }
 
-//getBusIdAndFireGetEta('q49', console.log)
+//getBusIdAndFireGetEta('q49', '550669', console.log)
