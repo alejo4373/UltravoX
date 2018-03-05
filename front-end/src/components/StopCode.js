@@ -1,17 +1,19 @@
 import React from 'react';
-import axios from 'axios'; 
 
 class Destination extends React.Component {
   render() {
     return (
-      <div 
-        class = "Block"
-        onClick={this.props.handleStopCodeVoiceInput}
-      >
-        {this.props.stopCode}
+      <div className="Block" onClick={this.props.handleStopCodeVoiceInput}>
+        {this.props.bus
+          ? (this.props.listening2
+            ? 'Listening'
+            : (this.props.stopCode
+              ? this.props.stopCode
+              : <img src='/microphone.png' alt='microphone'/>))
+          : 'Press'
+}
       </div>
     );
   }
 }
 export default Destination
-
