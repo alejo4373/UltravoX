@@ -14,7 +14,7 @@ class BusRoute extends React.Component {
           ? 'listening'
           : (this.props.bus
             ? this.props.bus
-            : <img src='/microphone.png' alt='microphone'/>)}
+            : <img className='mic' src='/microphone.png' alt='microphone'/>)}
       </div>
     );
   }
