@@ -9,7 +9,7 @@ class Destination extends React.Component {
             ? 'Listening'
             : (this.props.stopCode
               ? this.props.stopCode
-              : <img src='/microphone.png' alt='microphone'/>))
+              : <img className='mic' src='/microphone.png' alt='microphone'/>))
           : 'Press'
 }
       </div>
