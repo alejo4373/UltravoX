@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios'
 import './App.css';
 
@@ -33,7 +33,7 @@ class App extends Component {
     console.log('listening for Bus')
     speechRec.start()
     speechRec.onStart = () => {
-      this.setState({listening: true})
+      this.setState({ listening: true })
     }
     speechRec.onResult = () => {
       this.setState({
@@ -50,7 +50,7 @@ class App extends Component {
     console.log('listening for StopCode')
     speechRec.start()
     speechRec.onStart = () => {
-      this.setState({listening2: true})
+      this.setState({ listening2: true })
     }
     speechRec.onResult = () => {
       this.setState({
@@ -66,13 +66,13 @@ class App extends Component {
   componentDidUpdate() {
     speaker = new p5.Speech()
     console.log('componentDidUpdate')
-    const {bus, stopCode, eta} = this.state;
+    const { bus, stopCode, eta } = this.state;
     if ((bus && stopCode) && eta === '') {
       axios
         .post('/bus/get_time', {
-        bus: this.state.bus,
-        stop_id: this.state.stopCode
-      })
+          bus: this.state.bus,
+          stop_id: this.state.stopCode
+        })
         .then(res => {
           var eta = res.data.eta
           var minutesAway = res.data.minutesAway
@@ -85,7 +85,7 @@ class App extends Component {
             return speaker.speak(`The ${bus} is at the terminal, scheduled for departure at ${departureTime}`)
           }
           speaker.speak(`The ${bus} will be arriving in about ${res.data.minutesAway} minutes.`)
-          this.setState({eta: eta, minutesAway: minutesAway, proximityText: proximityText, listening: false})
+          this.setState({ eta: eta, minutesAway: minutesAway, proximityText: proximityText, listening: false })
         })
         .catch(err => {
           speaker.speak(`Something went wrong, please try again`)
@@ -107,20 +107,20 @@ class App extends Component {
           className="Block"
           bus={this.state.bus}
           listening={this.state.listening}
-          handleBusVoiceInput={this.handleBusVoiceInput}/>
+          handleBusVoiceInput={this.handleBusVoiceInput} />
         <StopCode
           className="Block"
           bus={this.state.bus}
           stopCode={this.state.stopCode}
           listening2={this.state.listening2}
-          handleStopCodeVoiceInput={this.handleStopCodeVoiceInput}/>
+          handleStopCodeVoiceInput={this.handleStopCodeVoiceInput} />
         <BusTime
           className="Block"
           listening={this.state.listening}
           listening2={this.state.listening2}
           stopCode={this.state.stopCode}
           bus={this.state.bus}
-          minutesAway={this.state.minutesAway}/>
+          minutesAway={this.state.minutesAway} />
 
       </div>
     );

@@ -1,14 +1,13 @@
 var axios = require('axios')
-var siriApiKey = 'b6ce6ad1-765b-4084-b947-02d9cdeb0610';
+var { MTA_BUS_TIME_API_KEY } = process.env;
 var oneStopAwayApiKey = '6df76799-8845-447c-b2c9-e3fdd328ced2';
 
 const getEta = (busId, stopId, callback) => {
-  axios
-    .get(`http://bustime.mta.info/api/siri/stop-monitoring.json?key=${siriApiKey}&OperatorRef=MTA&MonitoringRef=${stopId}&LineRef=${busId}&version=2`)
+  const url = `http://bustime.mta.info/api/siri/stop-monitoring.json?key=${MTA_BUS_TIME_API_KEY}&OperatorRef=MTA&MonitoringRef=${stopId}&LineRef=${busId}&version=2`
+  console.log(url)
+  axios.get(url)
     .then(apiRes => {
-      // console.log(apiRes.data)
-      // console.log('ETA', apiRes.data.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime)
-      // console.log('ETA', apiRes.data.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall)
+      console.log(apiRes.data.Siri)
       var eta = apiRes.data.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime
       var now = Date.now()
       var etaMil = Date.parse(eta)
@@ -25,7 +24,7 @@ const getEta = (busId, stopId, callback) => {
     })
     .catch(err => {
       throw err
-     // next(err)
+      // next(err)
     })
 }
 
@@ -33,15 +32,15 @@ const getBusIdAndFireGetEta = (busName, stopId, callback) => {
   axios
     .get(`http://bustime.mta.info/api/search?q=${busName}`)
     .then(data => {
-        //var matches = data.data.searchResults.matches;
-        var busId = data.data.searchResults.matches[0].id
-        console.log(busId)
-        getEta(busId, stopId, callback)
+      //var matches = data.data.searchResults.matches;
+      var busId = data.data.searchResults.matches[0].id
+      console.log(busId)
+      getEta(busId, stopId, callback)
     })
-     .catch(err => {
-       throw err
-       next(err)
-      })
+    .catch(err => {
+      throw err
+      next(err)
+    })
 }
 
 const getAllBuses = (callback) => {
@@ -52,10 +51,10 @@ const getAllBuses = (callback) => {
       const buses = busesList.map(bus => bus.shortName)
       callback(null, buses)
     })
-   .catch(err => {
-     console.log('err', err)
-     callback(err, null)
-   })
+    .catch(err => {
+      console.log('err', err)
+      callback(err, null)
+    })
 }
 
 const getStopIdsForBus = (callback) => {
@@ -66,15 +65,15 @@ const getStopIdsForBus = (callback) => {
       const buses = busesList.map(bus => bus.shortName)
       callback(null, buses)
     })
-   .catch(err => {
-     console.log('err', err)
-     callback(err, null)
-   })
+    .catch(err => {
+      console.log('err', err)
+      callback(err, null)
+    })
 }
 
-module.exports ={
-   getBusIdAndFireGetEta, 
-   getAllBuses,
+module.exports = {
+  getBusIdAndFireGetEta,
+  getAllBuses,
 }
 
 //getBusIdAndFireGetEta('q49', '550669', console.log)
